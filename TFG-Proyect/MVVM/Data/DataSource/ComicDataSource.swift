@@ -11,16 +11,16 @@ import Alamofire
 final class MarvelProvider {
     static let shared = MarvelProvider()
     
-    private let apiKey = "2dd73675a0935d5124da60e9fe89d9de"
     private let md5 = "5fb4d927a8cb3c4acb3026981f37651b"
     private let kBaseUrl = "https://gateway.marvel.com/v1/public/comics?"
+    private let apikey = "2dd73675a0935d5124da60e9fe89d9de"
     private let kStatusOk = 200...299
     private let timeStamp = 80
 
     
     func getComics(){
         
-        let url = "\(kBaseUrl)limit=10&ts=\(timeStamp)&apikey=\(apiKey)&hash=\(md5)"
+        let url = "\(kBaseUrl)limit=10&ts=\(timeStamp)&apikey=\(apikey)&hash=\(md5)"
         print(url)
         
         AF.request(url, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: ComicData.self) { response in

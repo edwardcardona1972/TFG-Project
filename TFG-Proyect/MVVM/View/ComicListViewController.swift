@@ -7,7 +7,7 @@
 
 import UIKit
 import Combine
-class UserListViewController: UIViewController {
+class ComicListViewController: UIViewController {
     
     
     
