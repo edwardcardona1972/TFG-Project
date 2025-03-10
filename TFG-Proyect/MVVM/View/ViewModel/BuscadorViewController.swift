@@ -8,13 +8,17 @@
 import UIKit
 import Combine
 
-class BuscadorViewController: UIViewController{
+class BuscadorViewController: UIViewController {
     
     @IBOutlet weak var mySearchBar: UISearchBar!
     @IBOutlet weak var tv: UITableView!
     
+    @IBOutlet weak var personajeView: UITableView!
+    
     var viewModel = BuscadorViewModel() //UserViewModel()
     var anyCancellable : [AnyCancellable] = []
+    var character : Character?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,8 @@ class BuscadorViewController: UIViewController{
         viewModel.fetchCharacters()
         
         mySearchBar.delegate = self
+        
+        tv.register(UINib(nibName: "CharacterListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterListItemTableViewCell")
 
         tv.delegate = self
         tv.dataSource = self
@@ -42,9 +48,18 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = viewModel.characters[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = user.name
+        let character = viewModel.characters[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterListItemTableViewCell", for: indexPath) as! CharacterListItemTableViewCell
+        cell.characterName.text = character.name
+        cell.characterDescription.text = character.description
+        
+        
+        
+        if let url = URL(string: character.thumbnail.path+"."+character.thumbnail.extension) {
+            if let imageData = try? Data(contentsOf: url){
+                cell.imageView?.image = UIImage(data: imageData)
+            }
+        }
         return cell
         
     }
@@ -61,4 +76,5 @@ extension BuscadorViewController: UISearchBarDelegate {
         viewModel.searchValue = ""
         searchBar.endEditing(true)
     }
+   
 }
