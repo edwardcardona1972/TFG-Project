@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import Combine
 class BuscadorViewModel: ObservableObject {
 
     @Published var characters: [CharacterModel] = []
-    var searchValue: String = ""
+    var reloadData = PassthroughSubject<Void, Error>()
+    var searchValue: String = "s"
     
     private let service = CharacterDataSource()
     
     func fetchCharacters(){
-        service.getCharacters(name: searchValue){ characters in
-            if (characters != nil){
-                self.characters = characters!
-            }
+        service.getCharacters(name: searchValue){ listOfCharacters in
+            self.characters = listOfCharacters ?? []
+            self.reloadData.send(())
         }
     }
     
