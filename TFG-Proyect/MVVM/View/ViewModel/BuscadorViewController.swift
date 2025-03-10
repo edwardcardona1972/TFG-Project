@@ -11,47 +11,30 @@ import Combine
 class BuscadorViewController: UIViewController{
     
     @IBOutlet weak var mySearchBar: UISearchBar!
+    @IBOutlet weak var tv: UITableView!
     
-    lazy var tableView : UITableView = {
-        let tv = UITableView()
-        tv.delegate = self
-        tv.dataSource = self
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        return tv
-    }()
     var viewModel = BuscadorViewModel() //UserViewModel()
     var anyCancellable : [AnyCancellable] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscriptions()
-        configTableView()
         viewModel.fetchCharacters()
-   
+        
+        mySearchBar.delegate = self
+
+        tv.delegate = self
+        tv.dataSource = self
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tv.translatesAutoresizingMaskIntoConstraints = false
     }
     func subscriptions(){
         viewModel.reloadData.sink { _ in} receiveValue: { _ in
-            self.tableView.reloadData()
+            self.tv.reloadData()
         }.store(in: &anyCancellable)
     }
     
-    private func configTableView() {
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            tableView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            tableView.heightAnchor.constraint(equalToConstant: view.frame.height)
-        ])
-    }
 }
-  extension BuscadorViewController: UISearchBarDelegate {
-        func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-            mySearchBar.resignFirstResponder()
-            return
-        }
-    }
 
 extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,11 +49,16 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         
     }
 }
-   /*extension BuscadorViewController: UISearchResultsUpdating {
-        func updateSearchResults(for searchController: UISearchController) {
-            viewModel.searchValue = searchController.searchBar.text ?? ""
-            viewModel.fetchCharacters()
-        }
-    }*/
 
-
+extension BuscadorViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchValue = searchBar.text ?? ""
+        viewModel.fetchCharacters()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchValue = ""
+        searchBar.endEditing(true)
+    }
+}

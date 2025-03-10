@@ -53,3 +53,8 @@ struct CharacterModel: Decodable{
     let description: String
     let thumbnail: Thumbnail
 }
+
+struct Thumbnail: Decodable{
+    let path: String
+    let `extension`: String
+}
