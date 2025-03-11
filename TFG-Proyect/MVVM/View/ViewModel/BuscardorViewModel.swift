@@ -11,7 +11,7 @@ class BuscadorViewModel: ObservableObject {
 
     @Published var characters: [CharacterModel] = []
     var reloadData = PassthroughSubject<Void, Error>()
-    var searchValue: String = "s"
+    var searchValue: String = "A"
     
     private let service = CharacterDataSource()
     

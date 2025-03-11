@@ -15,7 +15,7 @@ class BuscadorViewController: UIViewController {
     
     @IBOutlet weak var personajeView: UITableView!
     
-    var viewModel = BuscadorViewModel() //UserViewModel()
+    var viewModel = BuscadorViewModel()
     var anyCancellable : [AnyCancellable] = []
     var character : Character?
     
@@ -24,9 +24,8 @@ class BuscadorViewController: UIViewController {
         super.viewDidLoad()
         subscriptions()
         viewModel.fetchCharacters()
-        
         mySearchBar.delegate = self
-        
+               
         tv.register(UINib(nibName: "CharacterListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterListItemTableViewCell")
 
         tv.delegate = self
@@ -56,25 +55,34 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         
         
         if let url = URL(string: character.thumbnail.path+"."+character.thumbnail.extension) {
-            if let imageData = try? Data(contentsOf: url){
-                cell.imageView?.image = UIImage(data: imageData)
-            }
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                // Error handling...
+                guard let imageData = data else { return }
+                
+                DispatchQueue.main.async {
+                    cell.characterImage.image = UIImage(data: imageData)
+                }
+            }.resume()
         }
         return cell
         
+        
+        
+        
     }
 }
-
-extension BuscadorViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchValue = searchBar.text ?? ""
-        viewModel.fetchCharacters()
-    }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        viewModel.searchValue = ""
-        searchBar.endEditing(true)
+    extension BuscadorViewController: UISearchBarDelegate {
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            viewModel.searchValue = searchBar.text ?? ""
+            viewModel.fetchCharacters()
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.text = ""
+            viewModel.searchValue = ""
+            searchBar.endEditing(true)
+        }
+        
     }
-   
-}
+
