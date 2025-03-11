@@ -14,8 +14,11 @@ class BuscadorViewController: UIViewController {
     @IBOutlet weak var tv: UITableView!
     
     @IBOutlet weak var personajeView: UITableView!
+   
     
-    var viewModel = BuscadorViewModel()
+    
+    private let mySegmentedOptions : [String] = ["Cómic", "Historias", "Eventos", "Series"]
+        var viewModel = BuscadorViewModel()
     var anyCancellable : [AnyCancellable] = []
     var character : Character?
     
@@ -25,6 +28,7 @@ class BuscadorViewController: UIViewController {
         subscriptions()
         viewModel.fetchCharacters()
         mySearchBar.delegate = self
+        
                
         tv.register(UINib(nibName: "CharacterListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterListItemTableViewCell")
 
@@ -65,10 +69,7 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
             }.resume()
         }
         return cell
-        
-        
-        
-        
+
     }
 }
     
@@ -84,5 +85,6 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
             searchBar.endEditing(true)
         }
         
+    func
     }
 
