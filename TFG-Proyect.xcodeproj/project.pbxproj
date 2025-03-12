@@ -33,22 +33,9 @@
 		A00672492D7863450078FC09 /* TFG-ProyectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TFG-ProyectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A00672512D7863450078FC09 /* Exceptions for "TFG-Proyect" folder in "TFG-Proyect" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = A00672282D7863440078FC09 /* TFG-Proyect */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A006722B2D7863440078FC09 /* TFG-Proyect */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A00672512D7863450078FC09 /* Exceptions for "TFG-Proyect" folder in "TFG-Proyect" target */,
-			);
 			path = "TFG-Proyect";
 			sourceTree = "<group>";
 		};

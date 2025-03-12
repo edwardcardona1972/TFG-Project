@@ -73,18 +73,16 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
     }
 }
     
-    extension BuscadorViewController: UISearchBarDelegate {
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            viewModel.searchValue = searchBar.text ?? ""
-            viewModel.fetchCharacters()
-        }
-        
-        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.text = ""
-            viewModel.searchValue = ""
-            searchBar.endEditing(true)
-        }
-        
-    func
+extension BuscadorViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchValue = searchBar.text ?? ""
+        viewModel.fetchCharacters()
     }
-
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchValue = ""
+        searchBar.endEditing(true)
+    }
+        
+}
