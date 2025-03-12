@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="282" id="KGk-i7-Jjw" customClass="CharacterListItemTableViewCell" customModule="TFG_Proyect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="524" height="282"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="524" height="282"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-4Y-ztO">
+                        <rect key="frame" x="20" y="31" width="100" height="100"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="person.circle.fill" catalog="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="vmJ-8Z-NeV">
+                                <rect key="frame" x="20" y="20.666666666666671" width="93" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="A8y-b7-ciU"/>
+                            <constraint firstAttribute="height" constant="100" id="Wqy-Pp-bPf"/>
+                        </constraints>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="X2P-wd-Pog">
+                        <rect key="frame" x="140" y="11" width="370" height="250"/>
+                        <subviews>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="324" translatesAutoresizingMaskIntoConstraints="NO" id="G5q-3V-pw5">
+                                <rect key="frame" x="0.0" y="0.0" width="370" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="JLj-le-Flu"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Personaje">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="18"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ybp-gv-Ih1">
+                                <rect key="frame" x="20" y="100" width="350" height="173"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Bibliografia">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="250" id="KsJ-6z-8v0"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="9ID-4Y-ztO" secondAttribute="bottom" constant="20" id="7gg-GJ-vON"/>
+                    <constraint firstItem="X2P-wd-Pog" firstAttribute="leading" secondItem="9ID-4Y-ztO" secondAttribute="trailing" constant="20" id="8Wj-VH-qOM"/>
+                    <constraint firstItem="9ID-4Y-ztO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="OAI-R8-5Af"/>
+                    <constraint firstItem="9ID-4Y-ztO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Smh-XD-YS5"/>
+                    <constraint firstItem="X2P-wd-Pog" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Tqf-DL-aTe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="X2P-wd-Pog" secondAttribute="bottom" id="YNV-b0-nx2"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="X2P-wd-Pog" secondAttribute="trailing" id="nIg-JI-lcO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="characterDescription" destination="Ybp-gv-Ih1" id="ILw-fK-lur"/>
+                <outlet property="characterImage" destination="vmJ-8Z-NeV" id="PCD-Eo-psS"/>
+                <outlet property="characterName" destination="G5q-3V-pw5" id="8Gb-fN-nUG"/>
+            </connections>
+            <point key="canvasLocation" x="253.43511450381678" y="104.22535211267606"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+    </resources>
+</document>
