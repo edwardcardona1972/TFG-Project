@@ -9,18 +9,17 @@ import UIKit
 
 class DescripcionPersonajeViewController: UIViewController {
 
-    @IBOutlet weak var DescripcionLabel: UILabel!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
     
-    var personaje: String?
+    var character: CharacterModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // transform int to string
+        // vista con imagen, descripción y listado con comics, historias, eventos y series.
+        descriptionLabel.text = character?.description
         
-        DescripcionLabel.text = personaje ?? ""
-       
+        
     }
-    
-
-    
 }

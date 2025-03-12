@@ -20,6 +20,5 @@ class BuscadorViewModel: ObservableObject {
             self.characters = listOfCharacters ?? []
             self.reloadData.send(())
         }
-    }
-    
+    }    
 }
