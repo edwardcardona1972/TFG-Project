@@ -5,17 +5,19 @@
 //  Created by Eduard Alexis Cardona Grajales on 12/3/25.
 //
 
-import Foundation
+
 struct StoriesBaseResponse: Decodable {
-    let data: [StoryDataResponse]
+    let data: StoriesDataResponse
     let code: Int
 }
-struct StoryDataResponse: Decodable {
-    let results: [StoryResultResponse]
+
+struct StoriesDataResponse: Decodable {
+    let results: [StoryModel]
 }
-struct StoryResultResponse: Decodable {
+
+struct StoryModel: Decodable {
     let id: Int
     let title: String
-    let description: String
+    let description: String?
     let thumbnail: ThumbnailModel
 }
