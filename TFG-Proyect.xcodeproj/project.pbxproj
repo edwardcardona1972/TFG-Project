@@ -39,16 +39,6 @@
 			path = "TFG-Proyect";
 			sourceTree = "<group>";
 		};
-		A00672422D7863450078FC09 /* TFG-ProyectTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "TFG-ProyectTests";
-			sourceTree = "<group>";
-		};
-		A006724C2D7863450078FC09 /* TFG-ProyectUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "TFG-ProyectUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				A006722B2D7863440078FC09 /* TFG-Proyect */,
-				A00672422D7863450078FC09 /* TFG-ProyectTests */,
-				A006724C2D7863450078FC09 /* TFG-ProyectUITests */,
 				A032AB8A2D79993E0003848B /* Frameworks */,
 				A006722A2D7863440078FC09 /* Products */,
 			);
@@ -144,9 +132,6 @@
 			dependencies = (
 				A00672412D7863450078FC09 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				A00672422D7863450078FC09 /* TFG-ProyectTests */,
-			);
 			name = "TFG-ProyectTests";
 			packageProductDependencies = (
 			);
@@ -166,9 +151,6 @@
 			);
 			dependencies = (
 				A006724B2D7863450078FC09 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				A006724C2D7863450078FC09 /* TFG-ProyectUITests */,
 			);
 			name = "TFG-ProyectUITests";
 			packageProductDependencies = (
