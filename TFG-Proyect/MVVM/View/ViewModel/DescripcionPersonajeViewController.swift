@@ -8,18 +8,30 @@
 import UIKit
 
 class DescripcionPersonajeViewController: UIViewController {
-
+    
     
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var resourceSelector: UISegmentedControl!
+    @IBOutlet weak var goToList: UIButton!
+    @IBOutlet weak var descriptionPersonaje: UIStackView!
+    @IBOutlet weak var itemListings: UIStackView!
     
     var character: CharacterModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // transform int to string
-        // vista con imagen, descripción y listado con comics, historias, eventos y series.
-        descriptionLabel.text = character?.description
         
-        
+        if let url = URL(string: (character?.thumbnail.path)!+"."+(character?.thumbnail.extension)!) {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                // Error handling...
+                guard let imageData = data else { return }
+                
+                DispatchQueue.main.async {
+                    self.characterImageView.image = UIImage(data: imageData)
+                }
+            }.resume()
+        }
     }
 }
+        

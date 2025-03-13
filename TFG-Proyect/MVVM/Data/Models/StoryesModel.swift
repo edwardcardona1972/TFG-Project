@@ -6,12 +6,12 @@
 //
 
 
-struct StoriesBaseResponse: Decodable {
-    let data: StoriesDataResponse
+struct StoryesBaseResponse: Decodable {
+    let data: StoryesDataResponse
     let code: Int
 }
 
-struct StoriesDataResponse: Decodable {
+struct StoryesDataResponse: Decodable {
     let results: [StoryModel]
 }
 
