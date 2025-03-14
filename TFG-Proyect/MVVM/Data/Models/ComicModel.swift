@@ -21,4 +21,3 @@ struct ComicModel: Decodable {
     let description: String?
     let thumbnail: ThumbnailModel
 }
-

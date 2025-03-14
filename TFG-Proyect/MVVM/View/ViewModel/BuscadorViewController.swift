@@ -30,12 +30,22 @@ class BuscadorViewController: UIViewController {
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tv.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     func subscriptions(){
         viewModel.reloadData.sink { _ in} receiveValue: { _ in
             self.tv.reloadData()
         }.store(in: &anyCancellable)
     }
+    
+    // MARK: - Navegar a otra pantalla
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "characterView" {
+            let vc = segue.destination as! DescripcionPersonajeViewController
+            vc.character = characterSelected
+        }
+    }
 }
+
 extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  viewModel.characters.count
@@ -60,7 +70,13 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        characterSelected = viewModel.characters[indexPath.row]
+        performSegue(withIdentifier: "characterView", sender: self)
+    }
 }
+
 extension BuscadorViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchValue = searchBar.text ?? ""
@@ -70,15 +86,5 @@ extension BuscadorViewController: UISearchBarDelegate {
         searchBar.text = ""
         viewModel.searchValue = ""
         searchBar.endEditing(true)
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        characterSelected = viewModel.characters[indexPath.row]
-        performSegue(withIdentifier: "characterView", sender: self)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "characterView" {
-            let vc = segue.destination as! DescripcionPersonajeViewController
-            vc.character = characterSelected
-        }
     }
 }

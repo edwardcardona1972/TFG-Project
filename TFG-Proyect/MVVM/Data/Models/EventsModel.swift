@@ -17,6 +17,5 @@ struct EventsDataResponse: Decodable {
 struct EventsModel: Decodable {
     let id: Int
     let title: String
-    let description: String
-    
+    let description: String   
 }

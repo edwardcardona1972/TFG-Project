@@ -12,9 +12,12 @@ class DescripcionPersonajeViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
-    
     @IBOutlet weak var tv: UITableView!
+    @IBOutlet weak var mySegmentedControl: UISegmentedControl!
+    
     var character: CharacterModel?
+
+    let listType: [String] = ["Cómics", "Historias", "Eventos", "Series"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,26 @@ class DescripcionPersonajeViewController: UIViewController {
                 }
             }.resume()
         }
+        //segmentedControl
+        for (index, value) in listType.enumerated() {
+            mySegmentedControl.setTitle(value, forSegmentAt: index)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "itemListView" {
+            let viewController = segue.destination as! ItemTableList
+            viewController.numeroDeFilas = 5
+        }
+    }
+    
+    // MARK: - Action
+    @IBAction func ButtonGoList(_ sender: Any) {
+        performSegue(withIdentifier: "itemListView", sender: nil)
+    }
+    
+    @IBAction func mySegmentControlAction(_ sender: Any) {
+        print("Gracias hijo por tu paciencia con el ser que tanto te ama")
     }
 }
 
