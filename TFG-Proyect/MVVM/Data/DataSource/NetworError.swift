@@ -25,7 +25,7 @@ extension NetworError: LocalizedError {
         case .invalidURL:
             return NSLocalizedString("La URL es invalida", comment: "")
         case .serializationFailed:
-            return NSLocalizedString("FAlló usando trato de serializar el body del request", comment: "")
+            return NSLocalizedString("Falló usando trato de serializar el body del request", comment: "")
         case .generic:
             return NSLocalizedString("La app falló popr un error desconocido, validar API-KEY", comment: "")
         case .couldNotConnectData:
@@ -37,7 +37,7 @@ extension NetworError: LocalizedError {
         case .jsonDecoder:
             return NSLocalizedString("Falló cunado leyó el JSON y no pudo decodificar", comment: "")
         case .unauthorized:
-            return NSLocalizedString("LA sesión fimalizo, vuelva a intentarlo ", comment: "")
+            return NSLocalizedString("La sesión fimalizo, vuelva a intentarlo ", comment: "")
         }
     }
 }

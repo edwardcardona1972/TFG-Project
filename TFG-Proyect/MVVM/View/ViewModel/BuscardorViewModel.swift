@@ -12,13 +12,15 @@ class BuscadorViewModel: ObservableObject {
     @Published var characters: [CharacterModel] = []
     var reloadData = PassthroughSubject<Void, Error>()
     var searchValue: String = "A"
-    
+    var networkError: NetworError?
     private let service = CharacterDataSource()
     
     func fetchCharacters(){
-        service.getCharacters(name: searchValue){ listOfCharacters in
+        service.getCharacters(name: searchValue){ listOfCharacters, error in
             self.characters = listOfCharacters ?? []
             self.reloadData.send(())
+            self.networkError = error
+            return
         }
-    }    
+    }
 }

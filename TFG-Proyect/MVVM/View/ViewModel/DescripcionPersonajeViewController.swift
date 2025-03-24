@@ -6,7 +6,9 @@
 //
 
 import UIKit
-
+protocol BuscadorViewControllerDelegate: AnyObject, ObservableObject {
+    func showError(_error : String, callbarck : (()->Void)?)
+}
 class DescripcionPersonajeViewController: UIViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -31,6 +33,7 @@ class DescripcionPersonajeViewController: UIViewController {
                 guard let imageData = data else { return }
                 DispatchQueue.main.async {
                     self.characterImage.image = UIImage(data: imageData)
+                    
                 }
             }.resume()
         }
@@ -50,11 +53,11 @@ class DescripcionPersonajeViewController: UIViewController {
     
     // MARK: - Action
     @IBAction func ButtonGoList(_ sender: Any) {
-        performSegue(withIdentifier: "itemListView", sender: nil)
+        performSegue(withIdentifier: "itemListView", sender: nil)     
     }
     
     @IBAction func mySegmentControlAction(_ sender: Any) {
-        //3
+       
         selectedTypeIndex = mySegmentedControl.selectedSegmentIndex
         tv.reloadData()
     }
@@ -77,7 +80,7 @@ extension DescripcionPersonajeViewController : UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let personaje = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
-        //5
+        
         switch selectedTypeIndex {
         case 1 :
             personaje.textLabel?.text = character?.stories?.items[indexPath.row]?.name
@@ -85,7 +88,8 @@ extension DescripcionPersonajeViewController : UITableViewDelegate, UITableViewD
 
         case 2 :
             personaje.textLabel?.text = character?.events?.items[indexPath.row]?.name
-            personaje.detailTextLabel?.text = character?.events?.items[indexPath.row]?.resurceURI
+            personaje.detailTextLabel?.text = character?.events?.items[indexPath.row]?.resourceURI
+            
             
         case 3 :
             personaje.textLabel?.text = character?.series?.items[indexPath.row]?.name
@@ -99,4 +103,3 @@ extension DescripcionPersonajeViewController : UITableViewDelegate, UITableViewD
         return personaje
     }
 }
-

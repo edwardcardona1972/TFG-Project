@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,7 +71,7 @@
                                 <rect key="frame" x="20" y="92" width="374" height="290"/>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="O5h-BI-eb5" userLabel="resourceSelector">
-                                <rect key="frame" x="20" y="582" width="374" height="41"/>
+                                <rect key="frame" x="57.5" y="582" width="299" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="9gs-x7-ba0"/>
                                 </constraints>
@@ -85,12 +86,20 @@
                                     <action selector="mySegmentControlAction:" destination="mm4-mC-3sD" eventType="valueChanged" id="ENQ-r7-fVN"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-fm-pxZ" userLabel="goToList">
-                                <rect key="frame" x="20" y="827.5" width="374" height="34.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-fm-pxZ" userLabel="goToList">
+                                <rect key="frame" x="120" y="800" width="174" height="62"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Ir al Listado"/>
+                                <buttonConfiguration key="configuration" style="plain" titleAlignment="center">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                    </backgroundConfiguration>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Ir al Listado"/>
+                                    </attributedString>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
                                 <connections>
-                                    <action selector="ButtonGoList:" destination="mm4-mC-3sD" eventType="touchUpInside" id="v3c-sy-wFu"/>
+                                    <action selector="ButtonGoList:" destination="mm4-mC-3sD" eventType="touchUpInside" id="KWP-Y7-u0I"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVn-p0-WSu">
@@ -112,7 +121,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QWA-J2-wz8">
-                                <rect key="frame" x="20" y="662" width="374" height="125.5"/>
+                                <rect key="frame" x="20" y="662" width="374" height="98"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celda" textLabel="mjH-xe-Weg" detailTextLabel="jak-hy-4Eh" imageView="Pcp-Is-vJy" rowHeight="72" style="IBUITableViewCellStyleSubtitle" id="eeo-8Q-IGq">
@@ -155,22 +164,22 @@
                             <constraint firstItem="QWA-J2-wz8" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="20" id="1ea-Dt-2hZ"/>
                             <constraint firstItem="O5h-BI-eb5" firstAttribute="centerX" secondItem="uVn-p0-WSu" secondAttribute="centerX" id="2qx-vT-vdD"/>
                             <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" secondItem="1Bb-Q0-lOZ" secondAttribute="trailing" constant="20" id="39K-9x-kGj"/>
-                            <constraint firstItem="Dbd-fm-pxZ" firstAttribute="leading" secondItem="O5h-BI-eb5" secondAttribute="leading" id="3b6-2u-QXI"/>
-                            <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" secondItem="Dbd-fm-pxZ" secondAttribute="trailing" constant="20" id="70o-3X-vZP"/>
                             <constraint firstItem="k5v-Sw-5ml" firstAttribute="top" secondItem="RdM-Ss-hOc" secondAttribute="top" id="8nH-Ls-2jy"/>
                             <constraint firstItem="k5v-Sw-5ml" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="20" id="96n-og-R6l"/>
+                            <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O5h-BI-eb5" secondAttribute="trailing" id="Azz-Iz-jLZ"/>
                             <constraint firstAttribute="trailing" secondItem="uVn-p0-WSu" secondAttribute="trailing" constant="20" id="CUI-68-iP4"/>
-                            <constraint firstAttribute="bottom" secondItem="O5h-BI-eb5" secondAttribute="bottom" constant="277" id="Gsc-2B-jgL"/>
                             <constraint firstItem="1Bb-Q0-lOZ" firstAttribute="top" secondItem="RdM-Ss-hOc" secondAttribute="top" constant="300" id="Ny5-33-gTy"/>
-                            <constraint firstItem="Dbd-fm-pxZ" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="20" id="P37-gt-290"/>
+                            <constraint firstItem="Dbd-fm-pxZ" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="120" id="Ovy-BW-Ved"/>
                             <constraint firstItem="k5v-Sw-5ml" firstAttribute="top" secondItem="RdM-Ss-hOc" secondAttribute="top" id="QfV-Fq-ylf"/>
                             <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" secondItem="QWA-J2-wz8" secondAttribute="trailing" constant="20" id="T8v-6H-kwp"/>
                             <constraint firstItem="Dbd-fm-pxZ" firstAttribute="top" secondItem="QWA-J2-wz8" secondAttribute="bottom" constant="40" id="V8o-OA-cdU"/>
+                            <constraint firstItem="O5h-BI-eb5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RdM-Ss-hOc" secondAttribute="leading" id="VaK-uG-sfm"/>
+                            <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" secondItem="Dbd-fm-pxZ" secondAttribute="trailing" constant="120" id="Zi2-qC-xaD"/>
                             <constraint firstItem="1Bb-Q0-lOZ" firstAttribute="top" secondItem="k5v-Sw-5ml" secondAttribute="bottom" constant="10" id="ZkZ-S5-Efq"/>
                             <constraint firstItem="RdM-Ss-hOc" firstAttribute="trailing" secondItem="k5v-Sw-5ml" secondAttribute="trailing" constant="20" id="aZS-zY-HIe"/>
                             <constraint firstItem="uVn-p0-WSu" firstAttribute="top" secondItem="1Bb-Q0-lOZ" secondAttribute="bottom" constant="10" id="gW5-wn-8E8"/>
                             <constraint firstItem="uVn-p0-WSu" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="20" id="iTB-9H-iYj"/>
-                            <constraint firstItem="Dbd-fm-pxZ" firstAttribute="top" secondItem="HXO-O6-nbS" secondAttribute="top" constant="827.5" id="nX2-Ux-Mma"/>
+                            <constraint firstItem="Dbd-fm-pxZ" firstAttribute="top" secondItem="HXO-O6-nbS" secondAttribute="top" constant="800" id="nX2-Ux-Mma"/>
                             <constraint firstItem="1Bb-Q0-lOZ" firstAttribute="leading" secondItem="RdM-Ss-hOc" secondAttribute="leading" constant="20" id="t1A-Bz-mDJ"/>
                             <constraint firstItem="RdM-Ss-hOc" firstAttribute="bottom" secondItem="Dbd-fm-pxZ" secondAttribute="bottom" id="tSU-Am-mPy"/>
                             <constraint firstItem="QWA-J2-wz8" firstAttribute="top" secondItem="O5h-BI-eb5" secondAttribute="bottom" constant="40" id="xve-Pw-9zl"/>
@@ -307,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRh-se-3b8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4593" y="-31"/>
+            <point key="canvasLocation" x="4362" y="-42"/>
         </scene>
         <!--Comics-->
         <scene sceneID="f9f-cX-RHX">
@@ -392,6 +401,9 @@
     <resources>
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

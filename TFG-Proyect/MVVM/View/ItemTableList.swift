@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class ItemTableList: UIViewController {
   
     @IBOutlet weak var itemTable: UITableView!
@@ -28,6 +27,7 @@ extension ItemTableList: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellItemList", for: indexPath)
         cell.textLabel?.text = "Item \(indexPath.row)"
         cell.detailTextLabel?.text = "Detalle Item \(indexPath.row)"
+        
         return cell
     }
 }

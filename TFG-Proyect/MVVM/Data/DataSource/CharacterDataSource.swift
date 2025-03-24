@@ -20,7 +20,7 @@ class CharacterDataSource: NSObject, ObservableObject {
     private static let baseUrl = "https://gateway.marvel.com/v1/public/"
     
     
-    func getCharacters(name: String, completed: @escaping ([CharacterModel]?) -> Void) {
+    func getCharacters(name: String, completed: @escaping ([CharacterModel]?, NetworError?) -> Void) {
         
         let charactersUrl = "characters"
         let characterParameters = "&nameStartsWith="
@@ -29,11 +29,12 @@ class CharacterDataSource: NSObject, ObservableObject {
         print(url.absoluteString)
         
         AF.request(url, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: CharactersBaseResponse.self) { response in
+            
             if let characters = response.value?.data.results {
                 print("Correctly")
-                completed(characters)
+                completed(characters, nil)
             }else {
-                
+                completed([],NetworError(rawValue: ""))
                 print(response.error?.responseCode ?? "No error")
             }
         }

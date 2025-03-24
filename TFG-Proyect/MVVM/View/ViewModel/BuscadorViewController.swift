@@ -24,11 +24,15 @@ class BuscadorViewController: UIViewController {
         mySearchBar.delegate = self
         
         tv.register(UINib(nibName: "CharacterListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterListItemTableViewCell")
-
+        
         tv.delegate = self
         tv.dataSource = self
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tv.translatesAutoresizingMaskIntoConstraints = false
+        
+        if(viewModel.networkError != nil){
+            networkError(_error: viewModel.networkError?.rawValue ?? "error", callbarck: nil)
+        }
     }
     
     func subscriptions(){
@@ -43,6 +47,24 @@ class BuscadorViewController: UIViewController {
             let vc = segue.destination as! DescripcionPersonajeViewController
             vc.character = characterSelected
         }
+    }
+    
+    func networkError(_error : String, callbarck : (()->Void)?){
+        let alert = UIAlertController(title: "Error", message: "No se encontraron personajes", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in
+            if let callbarck = callbarck{
+                callbarck()
+            }
+            print("retry button pressed")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+            if action.style == .cancel{
+                print("ok button pressed")
+            }
+        }))
+        
     }
 }
 
@@ -81,10 +103,14 @@ extension BuscadorViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchValue = searchBar.text ?? ""
         viewModel.fetchCharacters()
+        
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         viewModel.searchValue = ""
         searchBar.endEditing(true)
+        
     }
 }
+
+
