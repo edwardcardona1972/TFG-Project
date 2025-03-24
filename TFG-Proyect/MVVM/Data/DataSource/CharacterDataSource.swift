@@ -8,16 +8,16 @@
 import Foundation
 import Alamofire
 import Combine
+import CommonCrypto
+
 
 class CharacterDataSource: NSObject, ObservableObject {
     static let shared = CharacterDataSource()
-
+    
     private let kStatusOk = 200...299
-    private static let hash = "5fb4d927a8cb3c4acb3026981f37651b"
-    private static let timeStamp = 80
-    private static let apiKey = Bundle.main.infoDictionary?["API_KEY"] as! String
+    private static let publicKey = Bundle.main.infoDictionary?["API_KEY"] as! String
+    private static let privateApiKey = Bundle.main.infoDictionary?["PRIVATE_API_KEY"] as! String
     private static let baseUrl = "https://gateway.marvel.com/v1/public/"
-    private static let baseParameters = "?ts=\(timeStamp)&hash=\(hash)&apikey=\(apiKey)"
     
     
     func getCharacters(name: String, completed: @escaping ([CharacterModel]?) -> Void) {
@@ -25,23 +25,25 @@ class CharacterDataSource: NSObject, ObservableObject {
         let charactersUrl = "characters"
         let characterParameters = "&nameStartsWith="
         
-        let url = URL(string: CharacterDataSource.baseUrl + charactersUrl + CharacterDataSource.baseParameters + characterParameters + name)!
-    
+        let url = URL(string: CharacterDataSource.baseUrl + charactersUrl + getBaseParameters() + characterParameters + name)!
+        print(url.absoluteString)
+        
         AF.request(url, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: CharactersBaseResponse.self) { response in
             if let characters = response.value?.data.results {
                 print("Correctly")
                 completed(characters)
             }else {
+                
                 print(response.error?.responseCode ?? "No error")
             }
         }
     }
-    
+  
     func getComics(chararcterId: String, completed: @escaping ([ComicModel]?) -> Void){
         let comicsUrl = "comics"
         let comicsParameters = "&characters="
         
-        let url = URL(string: CharacterDataSource.baseUrl + comicsUrl + CharacterDataSource.baseParameters + comicsParameters + chararcterId)!
+        let url = URL(string: CharacterDataSource.baseUrl + comicsUrl + getBaseParameters() + comicsParameters + chararcterId)!
         
         AF.request(url, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: ComicBaseResponse.self) { response in
             if let comics = response.value?.data.results {
@@ -56,7 +58,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         let storyesUrl = "storyes"
         let storiesParameters = "&characters="
         
-        let url = URL(string: CharacterDataSource.baseUrl + storyesUrl + CharacterDataSource.baseParameters + storiesParameters + chararcterId)
+        let url = URL(string: CharacterDataSource.baseUrl + storyesUrl + getBaseParameters() + storiesParameters + chararcterId)
         
         AF.request(url!, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: StoryesBaseResponse.self) { response in
             if let Storyes = response.value?.data.results {
@@ -71,7 +73,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         let eventsUrl = "events"
         let eventsParameters = "&characters="
         
-        let url = URL(string: CharacterDataSource.baseUrl + eventsUrl + CharacterDataSource.baseParameters + eventsParameters + chararcterId)
+        let url = URL(string: CharacterDataSource.baseUrl + eventsUrl + getBaseParameters() + eventsParameters + chararcterId)
         
         AF.request(url!, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: EventsBaseResponse.self) { response in
             if let Events = response.value?.data.results {
@@ -86,7 +88,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         let seriesUrl = "series"
         let seriesParameters = "&characters="
         
-        let url = URL(string: CharacterDataSource.baseUrl + seriesUrl + CharacterDataSource.baseParameters + seriesParameters + chararcterId)
+        let url = URL(string: CharacterDataSource.baseUrl + seriesUrl + getBaseParameters() + seriesParameters + chararcterId)
         
         AF.request(url!, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: SeriesBaseResponse.self) { response in
             if let Series = response.value?.data.results {
@@ -97,4 +99,39 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
+    
+   private func getBaseParameters() -> String{
+        let timeStamp = getTimeStamp()
+        let hashValue = getHash(timeStamp: timeStamp)
+        return "?ts=\(timeStamp)&apikey=\(CharacterDataSource.publicKey)&hash=\(hashValue)"
+    }
+    
+    private func getHash(timeStamp: String) -> String{
+        let preHash = timeStamp + CharacterDataSource.privateApiKey + CharacterDataSource.publicKey
+        return toMD5(preHash)
+    }
+    
+    private func getTimeStamp() -> String{
+        let timestamp = NSDate().timeIntervalSince1970
+        return String(format: "%.0f", timestamp)
+    }
+    
+    private func toMD5(_ string: String) -> String {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        let messageData = string.data(using: .utf8)!
+        var digestData = Data(count: length)
+
+        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
+            messageData.withUnsafeBytes { messageBytes -> UInt8 in
+                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.baseAddress {
+                    let messageLength = CC_LONG(messageData.count)
+                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory.assumingMemoryBound(to: UInt8.self))
+                }
+                return 0 // irrelevant return value
+            }
+        }
+
+        return digestData.map { String(format: "%02hhx", $0) }.joined()
+    }
 }
+

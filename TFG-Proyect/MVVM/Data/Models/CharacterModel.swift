@@ -61,6 +61,6 @@ struct CharacterEventsModel: Decodable{
 }
  
 struct CharacterEventModel: Decodable{
-    let resurceURI: String?
+    let resourceURI: String?
     let name: String
 }
