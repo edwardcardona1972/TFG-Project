@@ -10,7 +10,6 @@ struct CharactersBaseResponse: Decodable{
     let status: String
     let data: CharactersDataResponse
 }
-
 struct CharactersDataResponse: Decodable{
     let offset: Int
     let limit: Int
@@ -18,7 +17,6 @@ struct CharactersDataResponse: Decodable{
     let count: Int
     let results: [CharacterModel]
 }
-
 struct CharacterModel: Decodable{
     let id: Int
     let name: String
@@ -32,34 +30,27 @@ struct CharacterModel: Decodable{
 struct CharacterComicsModel: Decodable{
     let items: [CharacterComicModel?]
 }
-
 struct CharacterComicModel: Decodable{
     let resourceURI: String?
     let name: String
 }
-
 struct CharacterSeriesModel: Decodable{
     let items: [CharacterSerieModel?]
 }
-
 struct CharacterSerieModel: Decodable{
     let resourceURI: String?
     let name: String
 }
-
 struct ChracterStoriesModel: Decodable{
     let items: [CharacterStoryModel?]
 }
-
 struct CharacterStoryModel: Decodable{
     let resourceURI: String?
     let name: String
 }
-
 struct CharacterEventsModel: Decodable{
     let items: [CharacterEventModel?]
-}
- 
+} 
 struct CharacterEventModel: Decodable{
     let resourceURI: String?
     let name: String

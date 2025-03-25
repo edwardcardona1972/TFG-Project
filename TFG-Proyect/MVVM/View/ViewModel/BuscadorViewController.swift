@@ -4,7 +4,6 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 9/3/25.
 //
-
 import UIKit
 import Combine
 
@@ -24,12 +23,10 @@ class BuscadorViewController: UIViewController {
         mySearchBar.delegate = self
         
         tv.register(UINib(nibName: "CharacterListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterListItemTableViewCell")
-        
         tv.delegate = self
         tv.dataSource = self
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        
+
         if(viewModel.networkError != nil){
             networkError(_error: viewModel.networkError?.rawValue ?? "error", callbarck: nil)
         }
@@ -42,7 +39,7 @@ class BuscadorViewController: UIViewController {
     }
     
     // MARK: - Navegar a otra pantalla
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "characterView" {
             let vc = segue.destination as! DescripcionPersonajeViewController
             vc.character = characterSelected
@@ -64,7 +61,6 @@ class BuscadorViewController: UIViewController {
                 print("ok button pressed")
             }
         }))
-        
     }
 }
 
@@ -78,7 +74,6 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterListItemTableViewCell", for: indexPath) as! CharacterListItemTableViewCell
         cell.characterName.text = character.name
         cell.characterDescription.text = character.description
-            
         
         if let url = URL(string: character.thumbnail.path+"."+character.thumbnail.extension) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -98,19 +93,15 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         performSegue(withIdentifier: "characterView", sender: self)
     }
 }
-
 extension BuscadorViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchValue = searchBar.text ?? ""
         viewModel.fetchCharacters()
-        
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         viewModel.searchValue = ""
         searchBar.endEditing(true)
-        
     }
 }
-
-

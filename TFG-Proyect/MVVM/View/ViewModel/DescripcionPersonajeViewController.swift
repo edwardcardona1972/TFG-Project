@@ -4,7 +4,6 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 11/3/25.
 //
-
 import UIKit
 protocol BuscadorViewControllerDelegate: AnyObject, ObservableObject {
     func showError(_error : String, callbarck : (()->Void)?)
@@ -16,8 +15,7 @@ class DescripcionPersonajeViewController: UIViewController {
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
-    
-    
+        
     var character: CharacterModel?
     let listType: [String] = ["Cómics", "Historias", "Eventos", "Series"]
     var selectedTypeIndex: Int = 0
@@ -33,7 +31,6 @@ class DescripcionPersonajeViewController: UIViewController {
                 guard let imageData = data else { return }
                 DispatchQueue.main.async {
                     self.characterImage.image = UIImage(data: imageData)
-                    
                 }
             }.resume()
         }
@@ -41,7 +38,6 @@ class DescripcionPersonajeViewController: UIViewController {
         for (index, value) in listType.enumerated() {
             mySegmentedControl.setTitle(value, forSegmentAt: index)
         }
-       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,7 +51,6 @@ class DescripcionPersonajeViewController: UIViewController {
     @IBAction func ButtonGoList(_ sender: Any) {
         performSegue(withIdentifier: "itemListView", sender: nil)     
     }
-    
     @IBAction func mySegmentControlAction(_ sender: Any) {
        
         selectedTypeIndex = mySegmentedControl.selectedSegmentIndex
@@ -64,7 +59,6 @@ class DescripcionPersonajeViewController: UIViewController {
 }
 
 extension DescripcionPersonajeViewController : UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch selectedTypeIndex {
         case 1 :
@@ -85,21 +79,16 @@ extension DescripcionPersonajeViewController : UITableViewDelegate, UITableViewD
         case 1 :
             personaje.textLabel?.text = character?.stories?.items[indexPath.row]?.name
             personaje.detailTextLabel?.text = character?.stories?.items[indexPath.row]?.resourceURI
-
         case 2 :
             personaje.textLabel?.text = character?.events?.items[indexPath.row]?.name
             personaje.detailTextLabel?.text = character?.events?.items[indexPath.row]?.resourceURI
-            
-            
         case 3 :
             personaje.textLabel?.text = character?.series?.items[indexPath.row]?.name
             personaje.detailTextLabel?.text = character?.series?.items[indexPath.row]?.resourceURI
-            
         default:
             personaje.textLabel?.text = character?.comics?.items[indexPath.row]?.name
             personaje.detailTextLabel?.text = character?.comics?.items[indexPath.row]?.resourceURI
         }
-
         return personaje
     }
 }

@@ -4,7 +4,6 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 10/3/25.
 //
-
 import UIKit
 
 class CharacterListItemTableViewCell: UITableViewCell {
@@ -17,6 +16,7 @@ class CharacterListItemTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

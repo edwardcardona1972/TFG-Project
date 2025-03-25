@@ -4,7 +4,6 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 14/3/25.
 //
-
 import UIKit
 class ItemTableList: UIViewController {
   
@@ -17,8 +16,8 @@ class ItemTableList: UIViewController {
         itemTable.dataSource = self
     }
 }
+
 extension ItemTableList: UITableViewDelegate,UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numeroDeFilas
     }
@@ -27,7 +26,6 @@ extension ItemTableList: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellItemList", for: indexPath)
         cell.textLabel?.text = "Item \(indexPath.row)"
         cell.detailTextLabel?.text = "Detalle Item \(indexPath.row)"
-        
         return cell
     }
 }

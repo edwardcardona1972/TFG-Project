@@ -10,7 +10,6 @@ import Alamofire
 import Combine
 import CommonCrypto
 
-
 class CharacterDataSource: NSObject, ObservableObject {
     static let shared = CharacterDataSource()
     
@@ -18,7 +17,6 @@ class CharacterDataSource: NSObject, ObservableObject {
     private static let publicKey = Bundle.main.infoDictionary?["API_KEY"] as! String
     private static let privateApiKey = Bundle.main.infoDictionary?["PRIVATE_API_KEY"] as! String
     private static let baseUrl = "https://gateway.marvel.com/v1/public/"
-    
     
     func getCharacters(name: String, completed: @escaping ([CharacterModel]?, NetworError?) -> Void) {
         
@@ -29,17 +27,16 @@ class CharacterDataSource: NSObject, ObservableObject {
         print(url.absoluteString)
         
         AF.request(url, method: .get).validate(statusCode: kStatusOk).responseDecodable(of: CharactersBaseResponse.self) { response in
-            
             if let characters = response.value?.data.results {
                 print("Correctly")
                 completed(characters, nil)
             }else {
-                completed([],NetworError(rawValue: ""))
+                completed([],NetworError.couldNotConnectData)
                 print(response.error?.responseCode ?? "No error")
             }
         }
     }
-  
+    
     func getComics(chararcterId: String, completed: @escaping ([ComicModel]?) -> Void){
         let comicsUrl = "comics"
         let comicsParameters = "&characters="
@@ -55,6 +52,7 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
+    
     func getStories(chararcterId: String, completed: @escaping ([StoryModel]?) -> Void){
         let storyesUrl = "storyes"
         let storiesParameters = "&characters="
@@ -70,6 +68,7 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
+    
     func getEvents(chararcterId: String, completed: @escaping ([EventsModel]?) -> Void){
         let eventsUrl = "events"
         let eventsParameters = "&characters="
@@ -100,7 +99,6 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
-    
    private func getBaseParameters() -> String{
         let timeStamp = getTimeStamp()
         let hashValue = getHash(timeStamp: timeStamp)
@@ -131,7 +129,6 @@ class CharacterDataSource: NSObject, ObservableObject {
                 return 0 // irrelevant return value
             }
         }
-
         return digestData.map { String(format: "%02hhx", $0) }.joined()
     }
 }

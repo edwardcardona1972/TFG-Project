@@ -9,7 +9,7 @@ import Foundation
 import Combine
 class BuscadorViewModel: ObservableObject {
 
-    @Published var characters: [CharacterModel] = []
+    var characters: [CharacterModel] = []
     var reloadData = PassthroughSubject<Void, Error>()
     var searchValue: String = "A"
     var networkError: NetworError?

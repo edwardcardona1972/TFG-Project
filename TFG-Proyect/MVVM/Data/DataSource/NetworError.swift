@@ -10,22 +10,18 @@ import Alamofire
 
 enum NetworError: String, Error {
     case invalidURL
-    case serializationFailed
     case generic
     case couldNotConnectData
     case httpResponseError
     case statusCodeError = "Ocurrio un error al tratar de consultar la API: satus code"
-    case jsonDecoder = "Error en intentar enttrar datos en el JSON"
-    case unauthorized = "No estas autorizado para realizar esta accion"
+    case jsonDecoder = "Error en intentar enttrar datos en el JSON"    
 }
+
 extension NetworError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-            
         case .invalidURL:
             return NSLocalizedString("La URL es invalida", comment: "")
-        case .serializationFailed:
-            return NSLocalizedString("Falló usando trato de serializar el body del request", comment: "")
         case .generic:
             return NSLocalizedString("La app falló popr un error desconocido, validar API-KEY", comment: "")
         case .couldNotConnectData:
@@ -35,9 +31,7 @@ extension NetworError: LocalizedError {
         case .statusCodeError:
             return NSLocalizedString("El status code es diferente a 200", comment: "")
         case .jsonDecoder:
-            return NSLocalizedString("Falló cunado leyó el JSON y no pudo decodificar", comment: "")
-        case .unauthorized:
-            return NSLocalizedString("La sesión fimalizo, vuelva a intentarlo ", comment: "")
+            return NSLocalizedString("Falló cuando leyó el JSON ", comment: "")
         }
     }
 }
