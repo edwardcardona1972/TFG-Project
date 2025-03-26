@@ -15,7 +15,7 @@ class DescripcionPersonajeViewController: UIViewController {
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
-        
+    
     var character: CharacterModel?
     let listType: [String] = ["Cómics", "Historias", "Eventos", "Series"]
     var selectedTypeIndex: Int = 0
@@ -27,7 +27,6 @@ class DescripcionPersonajeViewController: UIViewController {
         tv.dataSource = self
         if let url = URL(string: (character?.thumbnail.path)!+"."+(character?.thumbnail.extension)!) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
-                // Error handling...
                 guard let imageData = data else { return }
                 DispatchQueue.main.async {
                     self.characterImage.image = UIImage(data: imageData)
@@ -49,10 +48,10 @@ class DescripcionPersonajeViewController: UIViewController {
     
     // MARK: - Action
     @IBAction func ButtonGoList(_ sender: Any) {
-        performSegue(withIdentifier: "itemListView", sender: nil)     
+        performSegue(withIdentifier: "itemListView", sender: nil)
     }
     @IBAction func mySegmentControlAction(_ sender: Any) {
-       
+        
         selectedTypeIndex = mySegmentedControl.selectedSegmentIndex
         tv.reloadData()
     }

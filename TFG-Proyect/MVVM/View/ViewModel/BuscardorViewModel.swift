@@ -8,18 +8,19 @@
 import Foundation
 import Combine
 class BuscadorViewModel: ObservableObject {
-
+    
     var characters: [CharacterModel] = []
     var reloadData = PassthroughSubject<Void, Error>()
     var searchValue: String = "A"
     var networkError: NetworError?
     private let service = CharacterDataSource()
     
-    func fetchCharacters(){
+    func fetchCharacters() {
         service.getCharacters(name: searchValue){ listOfCharacters, error in
             self.characters = listOfCharacters ?? []
-            self.reloadData.send(())
             self.networkError = error
+            self.reloadData.send(())
+            
             return
         }
     }

@@ -6,7 +6,7 @@
 //
 import UIKit
 class ItemTableList: UIViewController {
-  
+    
     @IBOutlet weak var itemTable: UITableView!
     
     var numeroDeFilas: Int = 0

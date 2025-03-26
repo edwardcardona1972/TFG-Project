@@ -4,11 +4,11 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 13/3/25.
 //
-struct SeriesBaseResponse: Decodable{
+struct SeriesBaseResponse: Decodable {
     let data: SeriesDataResponse
     let code: Int
 }
-struct SeriesDataResponse: Decodable{
+struct SeriesDataResponse: Decodable {
     let results: [SeriesModel]
 }
 struct SeriesModel: Decodable {

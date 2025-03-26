@@ -32,7 +32,7 @@ class BuscadorViewController: UIViewController {
         }
     }
     
-    func subscriptions(){
+    func subscriptions() {
         viewModel.reloadData.sink { _ in} receiveValue: { _ in
             self.tv.reloadData()
         }.store(in: &anyCancellable)
@@ -46,27 +46,27 @@ class BuscadorViewController: UIViewController {
         }
     }
     
-    func networkError(_error : String, callbarck : (()->Void)?){
+    func networkError(_error : String, callbarck : (()->Void)?) {
         let alert = UIAlertController(title: "Error", message: "No se encontraron personajes", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in
-            if let callbarck = callbarck{
+            if let callbarck = callbarck {
                 callbarck()
             }
             print("retry button pressed")
         }))
         
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
-            if action.style == .cancel{
+            if action.style == .cancel {
                 print("ok button pressed")
             }
         }))
     }
 }
 
-extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
+extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  viewModel.characters.count
+        return viewModel.characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,9 +77,7 @@ extension BuscadorViewController : UITableViewDelegate, UITableViewDataSource{
         
         if let url = URL(string: character.thumbnail.path+"."+character.thumbnail.extension) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
-                // Error handling...
                 guard let imageData = data else { return }
-                
                 DispatchQueue.main.async {
                     cell.characterImage.image = UIImage(data: imageData)
                 }

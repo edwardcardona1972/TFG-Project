@@ -37,7 +37,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         }
     }
     
-    func getComics(chararcterId: String, completed: @escaping ([ComicModel]?) -> Void){
+    func getComics(chararcterId: String, completed: @escaping ([ComicModel]?) -> Void) {
         let comicsUrl = "comics"
         let comicsParameters = "&characters="
         
@@ -53,7 +53,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         }
     }
     
-    func getStories(chararcterId: String, completed: @escaping ([StoryModel]?) -> Void){
+    func getStories(chararcterId: String, completed: @escaping ([StoryModel]?) -> Void) {
         let storyesUrl = "storyes"
         let storiesParameters = "&characters="
         
@@ -69,7 +69,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         }
     }
     
-    func getEvents(chararcterId: String, completed: @escaping ([EventsModel]?) -> Void){
+    func getEvents(chararcterId: String, completed: @escaping ([EventsModel]?) -> Void) {
         let eventsUrl = "events"
         let eventsParameters = "&characters="
         
@@ -84,7 +84,7 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
-    func getSeries(chararcterId: String, completed: @escaping ([SeriesModel]?) -> Void){
+    func getSeries(chararcterId: String, completed: @escaping ([SeriesModel]?) -> Void) {
         let seriesUrl = "series"
         let seriesParameters = "&characters="
         
@@ -99,18 +99,18 @@ class CharacterDataSource: NSObject, ObservableObject {
             }
         }
     }
-   private func getBaseParameters() -> String{
+    private func getBaseParameters() -> String {
         let timeStamp = getTimeStamp()
         let hashValue = getHash(timeStamp: timeStamp)
         return "?ts=\(timeStamp)&apikey=\(CharacterDataSource.publicKey)&hash=\(hashValue)"
     }
     
-    private func getHash(timeStamp: String) -> String{
+    private func getHash(timeStamp: String) -> String {
         let preHash = timeStamp + CharacterDataSource.privateApiKey + CharacterDataSource.publicKey
         return toMD5(preHash)
     }
     
-    private func getTimeStamp() -> String{
+    private func getTimeStamp() -> String {
         let timestamp = NSDate().timeIntervalSince1970
         return String(format: "%.0f", timestamp)
     }
@@ -119,7 +119,7 @@ class CharacterDataSource: NSObject, ObservableObject {
         let length = Int(CC_MD5_DIGEST_LENGTH)
         let messageData = string.data(using: .utf8)!
         var digestData = Data(count: length)
-
+        
         _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
             messageData.withUnsafeBytes { messageBytes -> UInt8 in
                 if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.baseAddress {

@@ -5,19 +5,19 @@
 //  Created by Eduard Alexis Cardona Grajales on 9/3/25.
 //
 
-struct CharactersBaseResponse: Decodable{
+struct CharactersBaseResponse: Decodable {
     let code: Int
     let status: String
     let data: CharactersDataResponse
 }
-struct CharactersDataResponse: Decodable{
+struct CharactersDataResponse: Decodable {
     let offset: Int
     let limit: Int
     let total: Int
     let count: Int
     let results: [CharacterModel]
 }
-struct CharacterModel: Decodable{
+struct CharacterModel: Decodable {
     let id: Int
     let name: String
     let description: String?
@@ -27,31 +27,31 @@ struct CharacterModel: Decodable{
     let stories: ChracterStoriesModel?
     let events: CharacterEventsModel?
 }
-struct CharacterComicsModel: Decodable{
+struct CharacterComicsModel: Decodable {
     let items: [CharacterComicModel?]
 }
-struct CharacterComicModel: Decodable{
+struct CharacterComicModel: Decodable {
     let resourceURI: String?
     let name: String
 }
-struct CharacterSeriesModel: Decodable{
+struct CharacterSeriesModel: Decodable {
     let items: [CharacterSerieModel?]
 }
-struct CharacterSerieModel: Decodable{
+struct CharacterSerieModel: Decodable {
     let resourceURI: String?
     let name: String
 }
-struct ChracterStoriesModel: Decodable{
+struct ChracterStoriesModel: Decodable {
     let items: [CharacterStoryModel?]
 }
-struct CharacterStoryModel: Decodable{
+struct CharacterStoryModel: Decodable {
     let resourceURI: String?
     let name: String
 }
-struct CharacterEventsModel: Decodable{
+struct CharacterEventsModel: Decodable {
     let items: [CharacterEventModel?]
 } 
-struct CharacterEventModel: Decodable{
+struct CharacterEventModel: Decodable {
     let resourceURI: String?
     let name: String
 }

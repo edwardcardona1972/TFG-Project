@@ -4,7 +4,7 @@
 //
 //  Created by Eduard Alexis Cardona Grajales on 12/3/25.
 //
-struct ThumbnailModel: Decodable{
+struct ThumbnailModel: Decodable {
     let path: String
     let `extension`: String
 }
